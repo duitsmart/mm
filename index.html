@@ -102,6 +102,7 @@
     .amount {
       font-weight: bold;
       white-space: nowrap;
+      text-align: right;
     }
 
     .grid {
@@ -138,6 +139,7 @@
       background: #111827;
       color: white;
       cursor: pointer;
+      margin-top: 4px;
     }
 
     .button.secondary {
@@ -145,7 +147,24 @@
       color: #111827;
     }
 
-    .input {
+    .button.danger {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .small-button {
+      border: none;
+      border-radius: 10px;
+      padding: 8px 10px;
+      font-size: 12px;
+      font-weight: bold;
+      background: #fee2e2;
+      color: #991b1b;
+      cursor: pointer;
+    }
+
+    .input,
+    .select {
       width: 100%;
       padding: 14px;
       border: 1px solid #d1d5db;
@@ -201,6 +220,14 @@
       font-size: 14px;
       line-height: 1.5;
     }
+
+    .success-text {
+      display: none;
+      margin-top: 10px;
+      font-size: 14px;
+      color: #047857;
+      font-weight: bold;
+    }
   </style>
 </head>
 
@@ -215,28 +242,28 @@
     <main id="dashboardPage" class="page active">
       <div class="card">
         <div class="card-title">Total Balance</div>
-        <p class="big-amount">RM 12,450</p>
+        <p id="totalBalance" class="big-amount">RM 0.00</p>
       </div>
 
       <div class="grid">
         <div class="mini-card">
           <div class="mini-label">Cash</div>
-          <div class="mini-value">RM 850</div>
+          <div id="cashTotal" class="mini-value">RM 0.00</div>
         </div>
 
         <div class="mini-card">
-          <div class="mini-label">Savings</div>
-          <div class="mini-value">RM 6,200</div>
+          <div class="mini-label">Bank</div>
+          <div id="bankTotal" class="mini-value">RM 0.00</div>
+        </div>
+
+        <div class="mini-card">
+          <div class="mini-label">E-wallet</div>
+          <div id="ewalletTotal" class="mini-value">RM 0.00</div>
         </div>
 
         <div class="mini-card">
           <div class="mini-label">Investment</div>
-          <div class="mini-value">RM 5,400</div>
-        </div>
-
-        <div class="mini-card">
-          <div class="mini-label">This Month</div>
-          <div class="mini-value">+RM 900</div>
+          <div id="investmentTotal" class="mini-value">RM 0.00</div>
         </div>
       </div>
 
@@ -245,26 +272,18 @@
       <div class="card">
         <div class="row">
           <div>
-            <div class="row-label">Expected Income</div>
-            <div class="row-sub">Monthly plan</div>
+            <div class="row-label">Total Accounts</div>
+            <div class="row-sub">Accounts saved on this device</div>
           </div>
-          <div class="amount">RM 5,000</div>
+          <div id="accountCount" class="amount">0</div>
         </div>
 
         <div class="row">
           <div>
-            <div class="row-label">Actual Income</div>
-            <div class="row-sub">Recorded this month</div>
+            <div class="row-label">Storage</div>
+            <div class="row-sub">Browser localStorage</div>
           </div>
-          <div class="amount">RM 4,800</div>
-        </div>
-
-        <div class="row">
-          <div>
-            <div class="row-label">Expected Savings</div>
-            <div class="row-sub">Monthly target</div>
-          </div>
-          <div class="amount">RM 1,500</div>
+          <div class="amount">Local</div>
         </div>
       </div>
     </main>
@@ -273,35 +292,35 @@
     <main id="accountsPage" class="page">
       <div class="section-title">Accounts</div>
 
-      <div class="card">
-        <div class="row">
-          <div>
-            <div class="row-label">Maybank Savings</div>
-            <div class="row-sub">Bank</div>
-          </div>
-          <div class="amount">RM 4,200</div>
-        </div>
-
-        <div class="row">
-          <div>
-            <div class="row-label">TNG eWallet</div>
-            <div class="row-sub">E-wallet</div>
-          </div>
-          <div class="amount">RM 250</div>
-        </div>
-
-        <div class="row">
-          <div>
-            <div class="row-label">Investment Account</div>
-            <div class="row-sub">Investment</div>
-          </div>
-          <div class="amount">RM 5,400</div>
-        </div>
+      <div id="accountsList" class="card">
+        <p class="empty-text">No accounts yet. Add your first account below.</p>
       </div>
 
-      <button class="button" onclick="alert('Add account will be built next')">
-        Add Account
-      </button>
+      <div class="section-title">Add Account</div>
+
+      <div class="card">
+        <label class="label">Account Name</label>
+        <input id="accountName" class="input" type="text" placeholder="Example: Maybank Savings" />
+
+        <label class="label">Account Type</label>
+        <select id="accountType" class="select">
+          <option value="Bank">Bank</option>
+          <option value="Cash">Cash</option>
+          <option value="E-wallet">E-wallet</option>
+          <option value="Investment">Investment</option>
+          <option value="Savings">Savings</option>
+          <option value="Other">Other</option>
+        </select>
+
+        <label class="label">Current Balance</label>
+        <input id="accountBalance" class="input" type="number" inputmode="decimal" placeholder="Example: 4200" />
+
+        <button class="button" onclick="addAccount()">
+          Save Account
+        </button>
+
+        <div id="saveMessage" class="success-text">Account saved.</div>
+      </div>
     </main>
 
     <!-- Plan -->
@@ -309,21 +328,9 @@
       <div class="section-title">Monthly Plan</div>
 
       <div class="card">
-        <label class="label">Expected Income</label>
-        <input class="input" type="number" placeholder="5000" />
-
-        <label class="label">Actual Income</label>
-        <input class="input" type="number" placeholder="4800" />
-
-        <label class="label">Expected Savings</label>
-        <input class="input" type="number" placeholder="1500" />
-
-        <label class="label">Actual Savings</label>
-        <input class="input" type="number" placeholder="900" />
-
-        <button class="button" onclick="alert('Plan saved test')">
-          Save Plan
-        </button>
+        <p class="empty-text">
+          We will build this next. For now, the account saving and dashboard totals are working first.
+        </p>
       </div>
     </main>
 
@@ -333,33 +340,33 @@
 
       <div class="card">
         <p class="empty-text">
-          Settings will come later. For now, this page confirms that the mobile app layout and navigation are working.
+          Your data is saved only in this browser/device using localStorage.
         </p>
 
-        <button class="button secondary" onclick="alert('Settings test successful')">
-          Test Button
+        <button class="button danger" onclick="resetAllData()">
+          Reset All Data
         </button>
       </div>
     </main>
 
     <!-- Bottom Navigation -->
     <nav class="bottom-nav">
-      <button class="nav-item active" onclick="showPage('dashboard')">
+      <button class="nav-item active" onclick="showPage('dashboard', this)">
         <span class="nav-icon">🏠</span>
         Dashboard
       </button>
 
-      <button class="nav-item" onclick="showPage('accounts')">
+      <button class="nav-item" onclick="showPage('accounts', this)">
         <span class="nav-icon">💳</span>
         Accounts
       </button>
 
-      <button class="nav-item" onclick="showPage('plan')">
+      <button class="nav-item" onclick="showPage('plan', this)">
         <span class="nav-icon">📅</span>
         Plan
       </button>
 
-      <button class="nav-item" onclick="showPage('settings')">
+      <button class="nav-item" onclick="showPage('settings', this)">
         <span class="nav-icon">⚙️</span>
         Settings
       </button>
@@ -367,18 +374,176 @@
   </div>
 
   <script>
-    function showPage(pageName) {
+    const STORAGE_KEY = 'moneyManagerAccounts';
+
+    let accounts = loadAccounts();
+
+    function loadAccounts() {
+      const savedAccounts = localStorage.getItem(STORAGE_KEY);
+
+      if (!savedAccounts) {
+        return [];
+      }
+
+      try {
+        return JSON.parse(savedAccounts);
+      } catch (error) {
+        return [];
+      }
+    }
+
+    function saveAccounts() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(accounts));
+    }
+
+    function formatMoney(amount) {
+      return 'RM ' + Number(amount || 0).toLocaleString('en-MY', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+    }
+
+    function addAccount() {
+      const nameInput = document.getElementById('accountName');
+      const typeInput = document.getElementById('accountType');
+      const balanceInput = document.getElementById('accountBalance');
+      const saveMessage = document.getElementById('saveMessage');
+
+      const name = nameInput.value.trim();
+      const type = typeInput.value;
+      const balance = Number(balanceInput.value);
+
+      if (!name) {
+        alert('Please enter account name.');
+        return;
+      }
+
+      if (Number.isNaN(balance)) {
+        alert('Please enter a valid balance.');
+        return;
+      }
+
+      const account = {
+        id: Date.now(),
+        name: name,
+        type: type,
+        balance: balance
+      };
+
+      accounts.push(account);
+      saveAccounts();
+
+      nameInput.value = '';
+      balanceInput.value = '';
+
+      saveMessage.style.display = 'block';
+
+      setTimeout(function () {
+        saveMessage.style.display = 'none';
+      }, 1500);
+
+      renderApp();
+    }
+
+    function deleteAccount(accountId) {
+      const confirmed = confirm('Delete this account?');
+
+      if (!confirmed) {
+        return;
+      }
+
+      accounts = accounts.filter(function (account) {
+        return account.id !== accountId;
+      });
+
+      saveAccounts();
+      renderApp();
+    }
+
+    function resetAllData() {
+      const confirmed = confirm('Reset all saved data on this device?');
+
+      if (!confirmed) {
+        return;
+      }
+
+      accounts = [];
+      saveAccounts();
+      renderApp();
+
+      alert('All data has been reset.');
+    }
+
+    function getTotalByType(type) {
+      return accounts
+        .filter(function (account) {
+          return account.type === type;
+        })
+        .reduce(function (sum, account) {
+          return sum + Number(account.balance || 0);
+        }, 0);
+    }
+
+    function renderDashboard() {
+      const total = accounts.reduce(function (sum, account) {
+        return sum + Number(account.balance || 0);
+      }, 0);
+
+      document.getElementById('totalBalance').textContent = formatMoney(total);
+      document.getElementById('cashTotal').textContent = formatMoney(getTotalByType('Cash'));
+      document.getElementById('bankTotal').textContent = formatMoney(getTotalByType('Bank'));
+      document.getElementById('ewalletTotal').textContent = formatMoney(getTotalByType('E-wallet'));
+      document.getElementById('investmentTotal').textContent = formatMoney(getTotalByType('Investment'));
+      document.getElementById('accountCount').textContent = accounts.length;
+    }
+
+    function renderAccounts() {
+      const accountsList = document.getElementById('accountsList');
+
+      if (accounts.length === 0) {
+        accountsList.innerHTML = '<p class="empty-text">No accounts yet. Add your first account below.</p>';
+        return;
+      }
+
+      accountsList.innerHTML = accounts.map(function (account) {
+        return `
+          <div class="row">
+            <div>
+              <div class="row-label">${account.name}</div>
+              <div class="row-sub">${account.type}</div>
+            </div>
+
+            <div>
+              <div class="amount">${formatMoney(account.balance)}</div>
+              <button class="small-button" onclick="deleteAccount(${account.id})">
+                Delete
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderApp() {
+      renderDashboard();
+      renderAccounts();
+    }
+
+    function showPage(pageName, button) {
       const pages = document.querySelectorAll('.page');
       const navItems = document.querySelectorAll('.nav-item');
       const subtitle = document.getElementById('pageSubtitle');
 
-      pages.forEach(page => page.classList.remove('active'));
-      navItems.forEach(item => item.classList.remove('active'));
+      pages.forEach(function (page) {
+        page.classList.remove('active');
+      });
+
+      navItems.forEach(function (item) {
+        item.classList.remove('active');
+      });
 
       document.getElementById(pageName + 'Page').classList.add('active');
-
-      const clickedButton = event.currentTarget;
-      clickedButton.classList.add('active');
+      button.classList.add('active');
 
       if (pageName === 'dashboard') {
         subtitle.textContent = 'Your simple money overview';
@@ -396,6 +561,8 @@
         subtitle.textContent = 'App preferences and setup';
       }
     }
+
+    renderApp();
   </script>
 </body>
 </html>
