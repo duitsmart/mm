@@ -50,26 +50,23 @@
       align-items: center;
     }
 
-    .month-button {
-      border: none;
-      border-radius: 14px;
-      background: white;
-      height: 44px;
-      font-size: 22px;
-      font-weight: bold;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
-      cursor: pointer;
-    }
-
+    .month-button,
     .month-label {
       border: none;
       border-radius: 14px;
       background: white;
       height: 44px;
-      font-size: 16px;
       font-weight: bold;
       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
       cursor: pointer;
+    }
+
+    .month-button {
+      font-size: 22px;
+    }
+
+    .month-label {
+      font-size: 16px;
     }
 
     .page {
@@ -81,58 +78,45 @@
       display: block;
     }
 
-    .section-title {
-      font-size: 18px;
-      font-weight: bold;
-      margin: 18px 0 12px;
-    }
-
-    .card {
-      background: white;
-      border-radius: 18px;
-      padding: 16px;
-      margin-bottom: 14px;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
-    }
-
-    .summary-grid {
+    .pending-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
+      margin-bottom: 14px;
     }
 
-    .summary-card {
+    .pending-card {
       background: white;
       border-radius: 16px;
       padding: 15px;
       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
     }
 
-    .summary-label {
+    .pending-label {
       font-size: 13px;
       color: #6b7280;
       margin-bottom: 8px;
     }
 
-    .summary-value {
-      font-size: 20px;
+    .pending-value {
+      font-size: 24px;
       font-weight: bold;
     }
 
-    .summary-sub {
+    .pending-sub {
       font-size: 12px;
       color: #6b7280;
       margin-top: 5px;
     }
 
-    .sort-toggle {
+    .filter-toggle {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 8px;
-      margin-bottom: 14px;
+      margin: 12px 0 14px;
     }
 
-    .sort-button {
+    .filter-button {
       border: none;
       border-radius: 14px;
       padding: 12px;
@@ -143,34 +127,80 @@
       cursor: pointer;
     }
 
-    .sort-button.active {
+    .filter-button.active {
       background: #111827;
       color: white;
     }
 
-    .item-card {
+    .block {
       background: white;
       border-radius: 18px;
-      padding: 15px;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
+      overflow: hidden;
       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
-      border-left: 5px solid #d1d5db;
     }
 
-    .item-card.income {
-      border-left-color: #047857;
+    .block-header {
+      padding: 14px 15px;
+      border-bottom: 1px solid #eef0f2;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
     }
 
-    .item-card.expense {
-      border-left-color: #b45309;
+    .block-title {
+      font-size: 16px;
+      font-weight: bold;
     }
 
-    .item-card.savings {
-      border-left-color: #2563eb;
+    .block-sub {
+      font-size: 12px;
+      color: #6b7280;
+      margin-top: 3px;
     }
 
-    .item-card.completed {
-      opacity: 0.68;
+    .block-total {
+      font-size: 13px;
+      font-weight: bold;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .block-total-sub {
+      font-size: 11px;
+      color: #6b7280;
+      margin-top: 3px;
+    }
+
+    .block.income {
+      border-left: 5px solid #047857;
+    }
+
+    .block.expense {
+      border-left: 5px solid #b45309;
+    }
+
+    .block.savings {
+      border-left: 5px solid #2563eb;
+    }
+
+    .block.investment {
+      border-left: 5px solid #7c3aed;
+    }
+
+    .item {
+      padding: 14px 15px;
+      border-bottom: 1px solid #eef0f2;
+    }
+
+    .item:last-child {
+      border-bottom: none;
+    }
+
+    .item.completed,
+    .item.inactive {
+      opacity: 0.62;
     }
 
     .item-top {
@@ -181,7 +211,7 @@
     }
 
     .item-name {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: bold;
       margin-bottom: 4px;
     }
@@ -208,19 +238,9 @@
       font-weight: bold;
     }
 
-    .badge.income {
-      background: #d1fae5;
-      color: #047857;
-    }
-
-    .badge.expense {
+    .badge.pending {
       background: #fef3c7;
       color: #92400e;
-    }
-
-    .badge.savings {
-      background: #dbeafe;
-      color: #1d4ed8;
     }
 
     .badge.overdue {
@@ -233,10 +253,15 @@
       color: #374151;
     }
 
+    .badge.inactive {
+      background: #f3f4f6;
+      color: #6b7280;
+    }
+
     .item-actions {
       margin-top: 12px;
       display: grid;
-      grid-template-columns: 1fr 80px;
+      grid-template-columns: 1fr 78px;
       gap: 8px;
     }
 
@@ -257,9 +282,10 @@
       color: #111827;
     }
 
-    .button.danger {
-      background: #fee2e2;
-      color: #991b1b;
+    .button.disabled {
+      background: #f3f4f6;
+      color: #9ca3af;
+      cursor: not-allowed;
     }
 
     .small-button {
@@ -273,76 +299,13 @@
       cursor: pointer;
     }
 
-    .section-table {
-      padding: 0;
-      overflow: hidden;
-    }
-
-    .table-header {
-      display: grid;
-      grid-template-columns: 1.25fr 0.8fr 0.8fr 0.7fr;
-      gap: 6px;
-      padding: 12px 14px;
-      background: #f9fafb;
-      border-bottom: 1px solid #e5e7eb;
-      font-size: 11px;
-      font-weight: bold;
-      color: #6b7280;
-      text-transform: uppercase;
-    }
-
-    .table-row {
-      display: grid;
-      grid-template-columns: 1.25fr 0.8fr 0.8fr 0.7fr;
-      gap: 6px;
-      padding: 13px 14px;
-      border-bottom: 1px solid #eef0f2;
-      align-items: center;
-    }
-
-    .table-row:last-child {
-      border-bottom: none;
-    }
-
-    .row-name {
-      font-size: 14px;
-      font-weight: bold;
-    }
-
-    .row-sub {
-      font-size: 12px;
-      color: #6b7280;
-      margin-top: 3px;
-    }
-
-    .money {
-      text-align: right;
-      font-size: 12px;
-      font-weight: bold;
-      white-space: nowrap;
-    }
-
-    .status-text {
-      text-align: right;
-      font-size: 12px;
-      font-weight: bold;
-    }
-
-    .completed-text {
-      color: #047857;
-    }
-
-    .pending-text {
-      color: #b45309;
-    }
-
-    .overdue-text {
-      color: #b91c1c;
-    }
-
-    .empty-state {
+    .empty-card {
+      background: white;
+      border-radius: 18px;
+      padding: 24px 18px;
       text-align: center;
-      padding: 28px 18px;
+      margin-bottom: 14px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
     }
 
     .empty-title {
@@ -356,6 +319,20 @@
       font-size: 14px;
       line-height: 1.5;
       margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 18px 0 12px;
+    }
+
+    .note-card {
+      background: white;
+      border-radius: 18px;
+      padding: 16px;
+      margin-bottom: 14px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
     }
 
     .note {
@@ -399,10 +376,6 @@
       margin-bottom: 3px;
     }
 
-    .hidden {
-      display: none;
-    }
-
     @media (max-width: 390px) {
       .page {
         padding-left: 12px;
@@ -414,20 +387,12 @@
         padding-right: 12px;
       }
 
-      .table-header,
-      .table-row {
-        grid-template-columns: 1.2fr 0.8fr 0.8fr 0.7fr;
-        padding-left: 10px;
-        padding-right: 10px;
+      .item-name {
+        font-size: 14px;
       }
 
-      .money,
-      .status-text {
-        font-size: 11px;
-      }
-
-      .row-name {
-        font-size: 13px;
+      .item-amount {
+        font-size: 14px;
       }
     }
   </style>
@@ -437,7 +402,7 @@
   <div class="app">
     <header class="header">
       <h1>Money Manager</h1>
-      <p id="pageSubtitle">This month’s checklist</p>
+      <p id="pageSubtitle">This month’s planned money items</p>
 
       <div class="month-switcher">
         <button class="month-button" onclick="changeMonth(-1)">‹</button>
@@ -448,30 +413,25 @@
       </div>
     </header>
 
-    <!-- Dashboard -->
     <main id="dashboardPage" class="page active">
       <div id="dashboardContent"></div>
     </main>
 
-    <!-- Income -->
     <main id="incomePage" class="page">
       <div class="section-title">Income</div>
       <div id="incomeContent"></div>
     </main>
 
-    <!-- Expenses -->
     <main id="expensesPage" class="page">
       <div class="section-title">Expenses</div>
       <div id="expensesContent"></div>
     </main>
 
-    <!-- Savings -->
     <main id="savingsPage" class="page">
-      <div class="section-title">Savings</div>
+      <div class="section-title">Savings & Investments</div>
       <div id="savingsContent"></div>
     </main>
 
-    <!-- Bottom Navigation -->
     <nav class="bottom-nav">
       <button class="nav-item active" onclick="showPage('dashboard', this)">
         <span class="nav-icon">🏠</span>
@@ -496,85 +456,202 @@
   </div>
 
   <script>
+    const STORAGE_KEY = 'money-manager-monthly-blocks-v2';
+
     const today = new Date();
     let selectedYear = 2026;
-    let selectedMonth = 4; // May. JavaScript month starts from 0.
-    let sortMode = 'pending';
+    let selectedMonth = 4;
+    let viewFilter = 'all';
 
-    const monthData = {
+    const defaultData = {
       '2026-05': [
         {
           id: 1,
+          title: 'Income',
           type: 'income',
-          name: 'Rental Income',
-          expected: 800,
-          actual: 800,
-          day: 1,
-          completed: true,
-          order: 1
+          order: 1,
+          items: [
+            {
+              id: 101,
+              name: 'Rental Income',
+              expected: 800,
+              actual: 800,
+              day: 1,
+              completed: true,
+              order: 1
+            },
+            {
+              id: 102,
+              name: 'Salary',
+              expected: 4500,
+              actual: 0,
+              day: 25,
+              completed: false,
+              order: 2
+            },
+            {
+              id: 103,
+              name: 'Bonus',
+              expected: '',
+              actual: 0,
+              day: 30,
+              completed: false,
+              order: 3
+            }
+          ]
         },
         {
           id: 2,
-          type: 'income',
-          name: 'Salary',
-          expected: 4500,
-          actual: 0,
-          day: 25,
-          completed: false,
-          order: 2
+          title: 'Expenses / Family',
+          type: 'expense',
+          order: 2,
+          items: [
+            {
+              id: 201,
+              name: 'Parents Allowance',
+              expected: 1000,
+              actual: 1000,
+              day: 5,
+              completed: true,
+              order: 1
+            },
+            {
+              id: 202,
+              name: 'Family Meal',
+              expected: 300,
+              actual: 0,
+              day: 15,
+              completed: false,
+              order: 2
+            }
+          ]
         },
         {
           id: 3,
+          title: 'Expenses / Personal',
           type: 'expense',
-          name: 'Car Loan',
-          expected: 900,
-          actual: 900,
-          day: 5,
-          completed: true,
-          order: 3
+          order: 3,
+          items: [
+            {
+              id: 301,
+              name: 'Food',
+              expected: 900,
+              actual: 0,
+              day: 30,
+              completed: false,
+              order: 1
+            },
+            {
+              id: 302,
+              name: 'Transport',
+              expected: 500,
+              actual: 500,
+              day: 30,
+              completed: true,
+              order: 2
+            },
+            {
+              id: 303,
+              name: 'Shopping',
+              expected: '',
+              actual: 0,
+              day: 30,
+              completed: false,
+              order: 3
+            }
+          ]
         },
         {
           id: 4,
+          title: 'Expenses / Properties',
           type: 'expense',
-          name: 'Internet Bill',
-          expected: 200,
-          actual: 0,
-          day: 10,
-          completed: false,
-          order: 4
+          order: 4,
+          items: [
+            {
+              id: 401,
+              name: 'Internet Bill',
+              expected: 200,
+              actual: 0,
+              day: 10,
+              completed: false,
+              order: 1
+            },
+            {
+              id: 402,
+              name: 'Maintenance Fee',
+              expected: 250,
+              actual: 0,
+              day: 20,
+              completed: false,
+              order: 2
+            }
+          ]
         },
         {
           id: 5,
-          type: 'expense',
-          name: 'Insurance',
-          expected: 250,
-          actual: 0,
-          day: 20,
-          completed: false,
-          order: 5
+          title: 'Savings',
+          type: 'savings',
+          order: 5,
+          items: [
+            {
+              id: 501,
+              name: 'Emergency Fund',
+              expected: 500,
+              actual: 500,
+              day: 30,
+              completed: true,
+              order: 1
+            },
+            {
+              id: 502,
+              name: 'Travel Fund',
+              expected: '',
+              actual: 0,
+              day: 30,
+              completed: false,
+              order: 2
+            }
+          ]
         },
         {
           id: 6,
-          type: 'savings',
-          name: 'Emergency Fund',
-          expected: 500,
-          actual: 500,
-          day: 30,
-          completed: true,
-          order: 6
-        },
-        {
-          id: 7,
-          type: 'savings',
-          name: 'Investment Cash',
-          expected: 600,
-          actual: 0,
-          day: 30,
-          completed: false,
-          order: 7
+          title: 'Investments',
+          type: 'investment',
+          order: 6,
+          items: [
+            {
+              id: 601,
+              name: 'Investment Cash',
+              expected: 600,
+              actual: 0,
+              day: 30,
+              completed: false,
+              order: 1
+            }
+          ]
         }
       ]
     };
+
+    let monthData = loadData();
+
+    function loadData() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+
+      if (!saved) {
+        return defaultData;
+      }
+
+      try {
+        return JSON.parse(saved);
+      } catch (error) {
+        return defaultData;
+      }
+    }
+
+    function saveData() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(monthData));
+    }
 
     function getMonthKey() {
       const monthNumber = String(selectedMonth + 1).padStart(2, '0');
@@ -588,47 +665,32 @@
       });
     }
 
-    function getItems() {
+    function getBlocks() {
       return monthData[getMonthKey()] || [];
     }
 
-    function saveItems(items) {
-      monthData[getMonthKey()] = items;
+    function setBlocks(blocks) {
+      monthData[getMonthKey()] = blocks;
+      saveData();
+    }
+
+    function hasExpectedValue(item) {
+      return item.expected !== '' && item.expected !== null && item.expected !== undefined && Number(item.expected) > 0;
+    }
+
+    function isPending(item) {
+      return hasExpectedValue(item) && !item.completed;
     }
 
     function formatMoney(amount) {
+      if (amount === '' || amount === null || amount === undefined) {
+        return '—';
+      }
+
       return 'RM ' + Number(amount || 0).toLocaleString('en-MY', {
         minimumFractionDigits: 0,
         maximumFractionDigits: 0
       });
-    }
-
-    function getTypeLabel(type) {
-      if (type === 'income') return 'Income';
-      if (type === 'expense') return 'Expense';
-      if (type === 'savings') return 'Savings';
-      return type;
-    }
-
-    function getActionLabel(type) {
-      if (type === 'income') return 'Mark Received';
-      if (type === 'expense') return 'Mark Paid';
-      if (type === 'savings') return 'Mark Saved';
-      return 'Mark Done';
-    }
-
-    function getCompletedLabel(type) {
-      if (type === 'income') return 'Received';
-      if (type === 'expense') return 'Paid';
-      if (type === 'savings') return 'Saved';
-      return 'Done';
-    }
-
-    function getPendingLabel(type) {
-      if (type === 'income') return 'Not received';
-      if (type === 'expense') return 'Not paid';
-      if (type === 'savings') return 'Not saved';
-      return 'Pending';
     }
 
     function getDateLabel(day) {
@@ -637,7 +699,7 @@
       });
     }
 
-    function getTodayDayForSelectedMonth() {
+    function getCurrentDayForSelectedMonth() {
       const isCurrentMonth =
         selectedYear === today.getFullYear() &&
         selectedMonth === today.getMonth();
@@ -650,82 +712,118 @@
     }
 
     function isOverdue(item) {
-      if (item.completed) return false;
-      return item.day < getTodayDayForSelectedMonth();
-    }
-
-    function getStatusLabel(item) {
-      if (item.completed) return getCompletedLabel(item.type);
-      if (isOverdue(item)) return 'Overdue';
-      return getPendingLabel(item.type);
-    }
-
-    function getStatusClass(item) {
-      if (item.completed) return 'completed-text';
-      if (isOverdue(item)) return 'overdue-text';
-      return 'pending-text';
-    }
-
-    function sortItems(items) {
-      const copied = [...items];
-
-      if (sortMode === 'manual') {
-        return copied.sort(function (a, b) {
-          return a.order - b.order;
-        });
+      if (!isPending(item)) {
+        return false;
       }
 
-      return copied.sort(function (a, b) {
-        const aOverdue = isOverdue(a) ? 0 : 1;
-        const bOverdue = isOverdue(b) ? 0 : 1;
+      return item.day < getCurrentDayForSelectedMonth();
+    }
 
-        if (a.completed !== b.completed) {
-          return a.completed ? 1 : -1;
-        }
+    function getActionLabel(type) {
+      if (type === 'income') return 'Mark Received';
+      if (type === 'expense') return 'Mark Paid';
+      if (type === 'savings') return 'Mark Saved';
+      if (type === 'investment') return 'Mark Invested';
+      return 'Mark Done';
+    }
 
-        if (aOverdue !== bOverdue) {
-          return aOverdue - bOverdue;
-        }
+    function getDoneLabel(type) {
+      if (type === 'income') return 'Received';
+      if (type === 'expense') return 'Paid';
+      if (type === 'savings') return 'Saved';
+      if (type === 'investment') return 'Invested';
+      return 'Done';
+    }
 
-        return a.day - b.day;
+    function getPendingLabel(type) {
+      if (type === 'income') return 'Not received';
+      if (type === 'expense') return 'Not paid';
+      if (type === 'savings') return 'Not saved';
+      if (type === 'investment') return 'Not invested';
+      return 'Pending';
+    }
+
+    function getStatusLabel(block, item) {
+      if (!hasExpectedValue(item)) {
+        return 'Not expected';
+      }
+
+      if (item.completed) {
+        return getDoneLabel(block.type);
+      }
+
+      if (isOverdue(item)) {
+        return 'Overdue';
+      }
+
+      return getPendingLabel(block.type);
+    }
+
+    function flattenItems(blocks) {
+      return blocks.flatMap(function (block) {
+        return block.items.map(function (item) {
+          return {
+            blockType: block.type,
+            blockTitle: block.title,
+            ...item
+          };
+        });
       });
     }
 
-    function markCompleted(itemId) {
-      const items = getItems();
-
-      const updated = items.map(function (item) {
-        if (item.id !== itemId) {
-          return item;
+    function markCompleted(blockId, itemId) {
+      const blocks = getBlocks().map(function (block) {
+        if (block.id !== blockId) {
+          return block;
         }
 
         return {
-          ...item,
-          actual: item.expected,
-          completed: true
+          ...block,
+          items: block.items.map(function (item) {
+            if (item.id !== itemId) {
+              return item;
+            }
+
+            if (!hasExpectedValue(item)) {
+              return item;
+            }
+
+            return {
+              ...item,
+              actual: Number(item.expected),
+              completed: true
+            };
+          })
         };
       });
 
-      saveItems(updated);
+      setBlocks(blocks);
       renderApp();
     }
 
-    function undoCompleted(itemId) {
-      const items = getItems();
-
-      const updated = items.map(function (item) {
-        if (item.id !== itemId) {
-          return item;
+    function undoCompleted(blockId, itemId) {
+      const blocks = getBlocks().map(function (block) {
+        if (block.id !== blockId) {
+          return block;
         }
 
         return {
-          ...item,
-          actual: 0,
-          completed: false
+          ...block,
+          items: block.items.map(function (item) {
+            if (item.id !== itemId) {
+              return item;
+            }
+
+            return {
+              ...item,
+              actual: 0,
+              completed: false
+            };
+          })
         };
       });
 
-      saveItems(updated);
+      setBlocks(blocks);
       renderApp();
     }
 
@@ -737,28 +835,41 @@
       const previousMonth = previousDate.getMonth();
       const previousKey = previousYear + '-' + String(previousMonth + 1).padStart(2, '0');
 
-      const previousItems = monthData[previousKey] || [];
+      const previousBlocks = monthData[previousKey] || [];
 
-      if (previousItems.length === 0) {
-        alert('Previous month has no items to copy.');
+      if (previousBlocks.length === 0) {
+        alert('Previous month has no blocks to copy.');
         return;
       }
 
-      const copiedItems = previousItems.map(function (item, index) {
+      const copiedBlocks = previousBlocks.map(function (block, blockIndex) {
         return {
-          ...item,
-          id: Date.now() + index,
-          actual: 0,
-          completed: false
+          ...block,
+          id: Date.now() + blockIndex,
+          items: block.items.map(function (item, itemIndex) {
+            return {
+              ...item,
+              id: Date.now() + blockIndex * 100 + itemIndex,
+              actual: 0,
+              completed: false
+            };
+          })
         };
       });
 
-      monthData[currentKey] = copiedItems;
+      monthData[currentKey] = copiedBlocks;
+      saveData();
       renderApp();
     }
 
     function startEmptyMonth() {
       monthData[getMonthKey()] = [];
+      saveData();
+      renderApp();
+    }
+
+    function setViewFilter(filter) {
+      viewFilter = filter;
       renderApp();
     }
 
@@ -766,119 +877,163 @@
       document.getElementById('monthLabel').textContent = getMonthName();
     }
 
+    function renderFilterToggle() {
+      return `
+        <div class="filter-toggle">
+          <button class="filter-button ${viewFilter === 'all' ? 'active' : ''}" onclick="setViewFilter('all')">
+            All Items
+          </button>
+
+          <button class="filter-button ${viewFilter === 'pending' ? 'active' : ''}" onclick="setViewFilter('pending')">
+            Pending Only
+          </button>
+        </div>
+      `;
+    }
+
     function renderEmptyMonth() {
       return `
-        <div class="card empty-state">
+        <div class="empty-card">
           <div class="empty-title">No records for ${getMonthName()}</div>
           <div class="empty-text">
-            This month is empty until you create it. You can copy the previous month as a fresh skeleton, or start empty.
+            This month is empty until you create it. Copy the previous month as a fresh skeleton, or start empty.
           </div>
 
-          <button class="button" onclick="copyPreviousMonth()">
-            Copy Previous Month
-          </button>
-
-          <button class="button secondary" onclick="startEmptyMonth()">
-            Start Empty
-          </button>
+          <button class="button" onclick="copyPreviousMonth()">Copy Previous Month</button>
+          <br><br>
+          <button class="button secondary" onclick="startEmptyMonth()">Start Empty</button>
         </div>
       `;
     }
 
-    function renderSummary(items) {
-      const expectedIncome = items
-        .filter(item => item.type === 'income')
-        .reduce((sum, item) => sum + item.expected, 0);
+    function countPendingByType(blocks, type) {
+      return blocks
+        .filter(function (block) {
+          return block.type === type;
+        })
+        .reduce(function (sum, block) {
+          return sum + block.items.filter(isPending).length;
+        }, 0);
+    }
 
-      const actualIncome = items
-        .filter(item => item.type === 'income')
-        .reduce((sum, item) => sum + item.actual, 0);
-
-      const expectedExpenses = items
-        .filter(item => item.type === 'expense')
-        .reduce((sum, item) => sum + item.expected, 0);
-
-      const actualExpenses = items
-        .filter(item => item.type === 'expense')
-        .reduce((sum, item) => sum + item.actual, 0);
-
-      const expectedSavings = items
-        .filter(item => item.type === 'savings')
-        .reduce((sum, item) => sum + item.expected, 0);
-
-      const actualSavings = items
-        .filter(item => item.type === 'savings')
-        .reduce((sum, item) => sum + item.actual, 0);
+    function renderPendingSummary(blocks) {
+      const incomePending = countPendingByType(blocks, 'income');
+      const expensePending = countPendingByType(blocks, 'expense');
+      const savingsPending = countPendingByType(blocks, 'savings');
+      const investmentPending = countPendingByType(blocks, 'investment');
 
       return `
-        <div class="summary-grid">
-          <div class="summary-card">
-            <div class="summary-label">Income</div>
-            <div class="summary-value">${formatMoney(actualIncome)}</div>
-            <div class="summary-sub">of ${formatMoney(expectedIncome)} received</div>
+        <div class="pending-grid">
+          <div class="pending-card">
+            <div class="pending-label">Income</div>
+            <div class="pending-value">${incomePending}</div>
+            <div class="pending-sub">pending</div>
           </div>
 
-          <div class="summary-card">
-            <div class="summary-label">Expenses</div>
-            <div class="summary-value">${formatMoney(actualExpenses)}</div>
-            <div class="summary-sub">of ${formatMoney(expectedExpenses)} paid</div>
+          <div class="pending-card">
+            <div class="pending-label">Expenses</div>
+            <div class="pending-value">${expensePending}</div>
+            <div class="pending-sub">pending</div>
           </div>
 
-          <div class="summary-card">
-            <div class="summary-label">Savings</div>
-            <div class="summary-value">${formatMoney(actualSavings)}</div>
-            <div class="summary-sub">of ${formatMoney(expectedSavings)} saved</div>
+          <div class="pending-card">
+            <div class="pending-label">Savings</div>
+            <div class="pending-value">${savingsPending}</div>
+            <div class="pending-sub">pending</div>
           </div>
 
-          <div class="summary-card">
-            <div class="summary-label">Pending</div>
-            <div class="summary-value">${items.filter(item => !item.completed).length}</div>
-            <div class="summary-sub">not happened yet</div>
+          <div class="pending-card">
+            <div class="pending-label">Investments</div>
+            <div class="pending-value">${investmentPending}</div>
+            <div class="pending-sub">pending</div>
           </div>
         </div>
       `;
     }
 
-    function renderSortToggle() {
-      return `
-        <div class="sort-toggle">
-          <button class="sort-button ${sortMode === 'manual' ? 'active' : ''}" onclick="setSortMode('manual')">
-            Manual Order
-          </button>
+    function renderBlock(block) {
+      let items = [...block.items].sort(function (a, b) {
+        return a.order - b.order;
+      });
 
-          <button class="sort-button ${sortMode === 'pending' ? 'active' : ''}" onclick="setSortMode('pending')">
-            Pending First
-          </button>
-        </div>
+      if (viewFilter === 'pending') {
+        items = items.filter(isPending);
+      }
+
+      if (items.length === 0 && viewFilter === 'pending') {
+        return '';
+      }
+
+      const activeItems = block.items.filter(hasExpectedValue);
+
+      const expectedTotal = activeItems.reduce(function (sum, item) {
+        return sum + Number(item.expected || 0);
+      }, 0);
+
+      const actualTotal = activeItems.reduce(function (sum, item) {
+        return sum + Number(item.actual || 0);
+      }, 0);
+
+      const pendingCount = activeItems.filter(isPending).length;
+
+      return `
+        <section class="block ${block.type}">
+          <div class="block-header">
+            <div>
+              <div class="block-title">${block.title}</div>
+              <div class="block-sub">${pendingCount} pending · ${activeItems.length} expected item(s)</div>
+            </div>
+
+            <div class="block-total">
+              ${formatMoney(actualTotal)}
+              <div class="block-total-sub">of ${formatMoney(expectedTotal)}</div>
+            </div>
+          </div>
+
+          ${items.map(function (item) {
+            return renderItem(block, item);
+          }).join('')}
+        </section>
       `;
     }
 
-    function renderItemCard(item) {
-      const status = getStatusLabel(item);
-      const statusBadgeClass = item.completed ? 'completed' : (isOverdue(item) ? 'overdue' : item.type);
+    function renderItem(block, item) {
+      const status = getStatusLabel(block, item);
+      const inactive = !hasExpectedValue(item);
+      const badgeClass = inactive ? 'inactive' : (item.completed ? 'completed' : (isOverdue(item) ? 'overdue' : 'pending'));
 
       return `
-        <div class="item-card ${item.type} ${item.completed ? 'completed' : ''}">
+        <div class="item ${item.completed ? 'completed' : ''} ${inactive ? 'inactive' : ''}">
           <div class="item-top">
             <div>
               <div class="item-name">${item.name}</div>
               <div class="item-meta">
-                ${getTypeLabel(item.type)} · ${getDateLabel(item.day)}
+                ${block.title} · ${getDateLabel(item.day)}
               </div>
-              <span class="badge ${statusBadgeClass}">${status}</span>
+              <span class="badge ${badgeClass}">${status}</span>
             </div>
 
             <div class="item-amount">
               ${formatMoney(item.expected)}
-              <div class="item-meta">${item.completed ? formatMoney(item.actual) + ' done' : 'Expected'}</div>
+              <div class="item-meta">
+                ${
+                  inactive
+                    ? 'No expected amount'
+                    : item.completed
+                      ? formatMoney(item.actual) + ' done'
+                      : 'Expected'
+                }
+              </div>
             </div>
           </div>
 
           <div class="item-actions">
             ${
-              item.completed
-                ? `<button class="button secondary" onclick="undoCompleted(${item.id})">Undo ${getCompletedLabel(item.type)}</button>`
-                : `<button class="button" onclick="markCompleted(${item.id})">${getActionLabel(item.type)}</button>`
+              inactive
+                ? `<button class="button disabled" disabled>Not Expected</button>`
+                : item.completed
+                  ? `<button class="button secondary" onclick="undoCompleted(${block.id}, ${item.id})">Undo ${getDoneLabel(block.type)}</button>`
+                  : `<button class="button" onclick="markCompleted(${block.id}, ${item.id})">${getActionLabel(block.type)}</button>`
             }
 
             <button class="small-button" onclick="alert('Edit will come later')">Edit</button>
@@ -888,79 +1043,62 @@
     }
 
     function renderDashboard() {
-      const items = getItems();
-      const dashboardContent = document.getElementById('dashboardContent');
-
-      if (items.length === 0) {
-        dashboardContent.innerHTML = renderEmptyMonth();
-        return;
-      }
-
-      const sorted = sortItems(items);
-
-      dashboardContent.innerHTML = `
-        ${renderSummary(items)}
-
-        <div class="section-title">This Month Checklist</div>
-
-        ${renderSortToggle()}
-
-        ${sorted.map(renderItemCard).join('')}
-      `;
-    }
-
-    function renderSection(type, elementId) {
-      const items = getItems().filter(function (item) {
-        return item.type === type;
+      const blocks = [...getBlocks()].sort(function (a, b) {
+        return a.order - b.order;
       });
 
-      const container = document.getElementById(elementId);
+      const container = document.getElementById('dashboardContent');
 
-      if (getItems().length === 0) {
+      if (blocks.length === 0) {
         container.innerHTML = renderEmptyMonth();
         return;
       }
 
-      if (items.length === 0) {
+      const blockHtml = blocks.map(renderBlock).join('');
+
+      container.innerHTML = `
+        ${renderPendingSummary(blocks)}
+        ${renderFilterToggle()}
+        ${blockHtml || '<div class="empty-card"><div class="empty-title">No pending items</div><div class="empty-text">Everything expected for this month has been completed.</div></div>'}
+      `;
+    }
+
+    function renderSectionPage(type, containerId) {
+      const blocks = [...getBlocks()]
+        .filter(function (block) {
+          if (type === 'savings') {
+            return block.type === 'savings' || block.type === 'investment';
+          }
+
+          return block.type === type;
+        })
+        .sort(function (a, b) {
+          return a.order - b.order;
+        });
+
+      const container = document.getElementById(containerId);
+
+      if (getBlocks().length === 0) {
+        container.innerHTML = renderEmptyMonth();
+        return;
+      }
+
+      if (blocks.length === 0) {
         container.innerHTML = `
-          <div class="card empty-state">
-            <div class="empty-title">No ${getTypeLabel(type).toLowerCase()} items yet</div>
-            <div class="empty-text">
-              This section has no items for ${getMonthName()}.
-            </div>
-            <button class="button" onclick="alert('Add item will come later')">Add Item</button>
+          <div class="empty-card">
+            <div class="empty-title">No items here yet</div>
+            <div class="empty-text">This section has no blocks for ${getMonthName()}.</div>
           </div>
         `;
         return;
       }
 
       container.innerHTML = `
-        <div class="card section-table">
-          <div class="table-header">
-            <div>Item</div>
-            <div class="money">Expected</div>
-            <div class="money">Actual</div>
-            <div class="status-text">Status</div>
-          </div>
+        ${blocks.map(renderBlock).join('')}
 
-          ${items.sort((a, b) => a.order - b.order).map(function (item) {
-            return `
-              <div class="table-row">
-                <div>
-                  <div class="row-name">${item.name}</div>
-                  <div class="row-sub">${getDateLabel(item.day)}</div>
-                </div>
-                <div class="money">${formatMoney(item.expected)}</div>
-                <div class="money">${formatMoney(item.actual)}</div>
-                <div class="status-text ${getStatusClass(item)}">${getStatusLabel(item)}</div>
-              </div>
-            `;
-          }).join('')}
-        </div>
-
-        <div class="card">
+        <div class="note-card">
           <p class="note">
-            This page is for reviewing ${getTypeLabel(type).toLowerCase()} items for ${getMonthName()}. Editing and adding items will come next.
+            Items with empty expected value are treated as not expected this month, so they are ignored from pending counts.
           </p>
         </div>
       `;
@@ -969,14 +1107,9 @@
     function renderApp() {
       renderMonthLabel();
       renderDashboard();
-      renderSection('income', 'incomeContent');
-      renderSection('expense', 'expensesContent');
-      renderSection('savings', 'savingsContent');
-    }
-
-    function setSortMode(mode) {
-      sortMode = mode;
-      renderDashboard();
+      renderSectionPage('income', 'incomeContent');
+      renderSectionPage('expense', 'expensesContent');
+      renderSectionPage('savings', 'savingsContent');
     }
 
     function changeMonth(direction) {
@@ -1005,19 +1138,19 @@
       button.classList.add('active');
 
       if (pageName === 'dashboard') {
-        subtitle.textContent = 'This month’s checklist';
+        subtitle.textContent = 'This month’s planned money items';
       }
 
       if (pageName === 'income') {
-        subtitle.textContent = 'Expected income and received income';
+        subtitle.textContent = 'Income blocks for the selected month';
       }
 
       if (pageName === 'expenses') {
-        subtitle.textContent = 'Expected expenses and paid expenses';
+        subtitle.textContent = 'Expense blocks for the selected month';
       }
 
       if (pageName === 'savings') {
-        subtitle.textContent = 'Expected savings and saved amount';
+        subtitle.textContent = 'Savings and investment blocks for the selected month';
       }
     }
 
