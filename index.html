@@ -23,7 +23,7 @@
       margin: 0 auto;
       min-height: 100vh;
       background: #f4f6f8;
-      padding-bottom: 80px;
+      padding-bottom: 84px;
     }
 
     .header {
@@ -50,59 +50,42 @@
       display: block;
     }
 
+    .section-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 20px 0 12px;
+    }
+
     .card {
       background: white;
       border-radius: 18px;
-      padding: 18px;
+      padding: 16px;
       margin-bottom: 14px;
       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
     }
 
-    .card-title {
-      font-size: 14px;
-      color: #6b7280;
+    .summary-card {
+      background: #111827;
+      color: white;
+    }
+
+    .summary-label {
+      font-size: 13px;
+      color: #d1d5db;
       margin-bottom: 8px;
     }
 
-    .big-amount {
+    .summary-value {
       font-size: 32px;
       font-weight: bold;
       margin: 0;
     }
 
-    .section-title {
-      font-size: 18px;
-      font-weight: bold;
-      margin: 22px 0 12px;
-    }
-
-    .row {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      align-items: center;
-      padding: 12px 0;
-      border-bottom: 1px solid #eef0f2;
-    }
-
-    .row:last-child {
-      border-bottom: none;
-    }
-
-    .row-label {
-      font-weight: bold;
-    }
-
-    .row-sub {
+    .summary-sub {
+      margin-top: 8px;
+      color: #d1d5db;
       font-size: 13px;
-      color: #6b7280;
-      margin-top: 3px;
-    }
-
-    .amount {
-      font-weight: bold;
-      white-space: nowrap;
-      text-align: right;
+      line-height: 1.4;
     }
 
     .grid {
@@ -114,7 +97,7 @@
     .mini-card {
       background: white;
       border-radius: 16px;
-      padding: 16px;
+      padding: 15px;
       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
     }
 
@@ -129,6 +112,90 @@
       font-weight: bold;
     }
 
+    .mini-sub {
+      font-size: 12px;
+      color: #6b7280;
+      margin-top: 5px;
+    }
+
+    .table-card {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .table-header {
+      display: grid;
+      gap: 8px;
+      padding: 12px 14px;
+      background: #f9fafb;
+      border-bottom: 1px solid #e5e7eb;
+      font-size: 12px;
+      font-weight: bold;
+      color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .table-row {
+      display: grid;
+      gap: 8px;
+      padding: 14px;
+      border-bottom: 1px solid #eef0f2;
+      align-items: center;
+    }
+
+    .table-row:last-child {
+      border-bottom: none;
+    }
+
+    .income-grid,
+    .savings-grid {
+      grid-template-columns: 1.4fr 1fr 1fr;
+    }
+
+    .expenses-grid {
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    }
+
+    .category-name {
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .category-sub {
+      font-size: 12px;
+      color: #6b7280;
+      margin-top: 3px;
+    }
+
+    .money {
+      font-size: 13px;
+      font-weight: bold;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .muted {
+      color: #6b7280;
+    }
+
+    .positive {
+      color: #047857;
+    }
+
+    .warning {
+      color: #b45309;
+    }
+
+    .danger {
+      color: #b91c1c;
+    }
+
+    .total-row {
+      background: #f9fafb;
+      font-weight: bold;
+    }
+
     .button {
       width: 100%;
       border: none;
@@ -139,7 +206,7 @@
       background: #111827;
       color: white;
       cursor: pointer;
-      margin-top: 4px;
+      margin-top: 8px;
     }
 
     .button.secondary {
@@ -147,31 +214,14 @@
       color: #111827;
     }
 
-    .button.danger {
-      background: #fee2e2;
-      color: #991b1b;
-    }
-
-    .small-button {
-      border: none;
-      border-radius: 10px;
-      padding: 8px 10px;
-      font-size: 12px;
-      font-weight: bold;
-      background: #fee2e2;
-      color: #991b1b;
-      cursor: pointer;
-    }
-
-    .input,
-    .select {
+    .input {
       width: 100%;
-      padding: 14px;
+      padding: 13px;
       border: 1px solid #d1d5db;
       border-radius: 12px;
-      font-size: 16px;
+      font-size: 15px;
       margin-top: 8px;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
       background: white;
     }
 
@@ -179,6 +229,13 @@
       font-size: 14px;
       font-weight: bold;
       color: #374151;
+    }
+
+    .note {
+      font-size: 13px;
+      line-height: 1.5;
+      color: #6b7280;
+      margin: 0;
     }
 
     .bottom-nav {
@@ -215,18 +272,37 @@
       margin-bottom: 3px;
     }
 
-    .empty-text {
-      color: #6b7280;
-      font-size: 14px;
-      line-height: 1.5;
-    }
+    @media (max-width: 390px) {
+      .page {
+        padding-left: 12px;
+        padding-right: 12px;
+      }
 
-    .success-text {
-      display: none;
-      margin-top: 10px;
-      font-size: 14px;
-      color: #047857;
-      font-weight: bold;
+      .header {
+        padding-left: 12px;
+        padding-right: 12px;
+      }
+
+      .money {
+        font-size: 12px;
+      }
+
+      .category-name {
+        font-size: 13px;
+      }
+
+      .table-header {
+        font-size: 11px;
+      }
+
+      .income-grid,
+      .savings-grid {
+        grid-template-columns: 1.2fr 1fr 1fr;
+      }
+
+      .expenses-grid {
+        grid-template-columns: 1.25fr 1fr 1fr 1fr;
+      }
     }
   </style>
 </head>
@@ -235,101 +311,242 @@
   <div class="app">
     <header class="header">
       <h1>Money Manager</h1>
-      <p id="pageSubtitle">Your simple money overview</p>
+      <p id="pageSubtitle">Monthly overview based on expected and actual numbers</p>
     </header>
 
     <!-- Dashboard -->
     <main id="dashboardPage" class="page active">
-      <div class="card">
-        <div class="card-title">Total Balance</div>
-        <p id="totalBalance" class="big-amount">RM 0.00</p>
+      <div class="card summary-card">
+        <div class="summary-label">Monthly Position</div>
+        <p class="summary-value">RM 1,100</p>
+        <div class="summary-sub">
+          Actual income minus used expenses. Savings are tracked separately.
+        </div>
       </div>
 
       <div class="grid">
         <div class="mini-card">
-          <div class="mini-label">Cash</div>
-          <div id="cashTotal" class="mini-value">RM 0.00</div>
+          <div class="mini-label">Expected Income</div>
+          <div class="mini-value">RM 5,000</div>
+          <div class="mini-sub">Planned for this month</div>
         </div>
 
         <div class="mini-card">
-          <div class="mini-label">Bank</div>
-          <div id="bankTotal" class="mini-value">RM 0.00</div>
+          <div class="mini-label">Actual Income</div>
+          <div class="mini-value positive">RM 4,800</div>
+          <div class="mini-sub">Received so far</div>
         </div>
 
         <div class="mini-card">
-          <div class="mini-label">E-wallet</div>
-          <div id="ewalletTotal" class="mini-value">RM 0.00</div>
+          <div class="mini-label">Expected Expenses</div>
+          <div class="mini-value">RM 3,500</div>
+          <div class="mini-sub">Planned spending</div>
         </div>
 
         <div class="mini-card">
-          <div class="mini-label">Investment</div>
-          <div id="investmentTotal" class="mini-value">RM 0.00</div>
+          <div class="mini-label">Used Expenses</div>
+          <div class="mini-value warning">RM 3,700</div>
+          <div class="mini-sub">Used so far</div>
+        </div>
+
+        <div class="mini-card">
+          <div class="mini-label">Expected Savings</div>
+          <div class="mini-value">RM 1,500</div>
+          <div class="mini-sub">Saving target</div>
+        </div>
+
+        <div class="mini-card">
+          <div class="mini-label">Actual Savings</div>
+          <div class="mini-value positive">RM 1,100</div>
+          <div class="mini-sub">Saved so far</div>
         </div>
       </div>
 
-      <div class="section-title">Quick View</div>
+      <div class="section-title">Section Summary</div>
 
-      <div class="card">
-        <div class="row">
+      <div class="card table-card">
+        <div class="table-row income-grid">
           <div>
-            <div class="row-label">Total Accounts</div>
-            <div class="row-sub">Accounts saved on this device</div>
+            <div class="category-name">Income</div>
+            <div class="category-sub">Expected vs actual</div>
           </div>
-          <div id="accountCount" class="amount">0</div>
+          <div class="money">RM 5,000</div>
+          <div class="money positive">RM 4,800</div>
         </div>
 
-        <div class="row">
+        <div class="table-row expenses-grid">
           <div>
-            <div class="row-label">Storage</div>
-            <div class="row-sub">Browser localStorage</div>
+            <div class="category-name">Expenses</div>
+            <div class="category-sub">Expected / used / left</div>
           </div>
-          <div class="amount">Local</div>
+          <div class="money">RM 3,500</div>
+          <div class="money warning">RM 3,700</div>
+          <div class="money danger">-RM 200</div>
+        </div>
+
+        <div class="table-row savings-grid">
+          <div>
+            <div class="category-name">Savings</div>
+            <div class="category-sub">Expected vs actual</div>
+          </div>
+          <div class="money">RM 1,500</div>
+          <div class="money positive">RM 1,100</div>
         </div>
       </div>
     </main>
 
-    <!-- Accounts -->
-    <main id="accountsPage" class="page">
-      <div class="section-title">Accounts</div>
+    <!-- Income -->
+    <main id="incomePage" class="page">
+      <div class="section-title">Income</div>
 
-      <div id="accountsList" class="card">
-        <p class="empty-text">No accounts yet. Add your first account below.</p>
+      <div class="card table-card">
+        <div class="table-header income-grid">
+          <div>Category</div>
+          <div class="money">Expected</div>
+          <div class="money">Actual</div>
+        </div>
+
+        <div class="table-row income-grid">
+          <div>
+            <div class="category-name">Salary</div>
+            <div class="category-sub">Main income</div>
+          </div>
+          <div class="money">RM 4,500</div>
+          <div class="money positive">RM 4,500</div>
+        </div>
+
+        <div class="table-row income-grid">
+          <div>
+            <div class="category-name">Side Income</div>
+            <div class="category-sub">Optional income</div>
+          </div>
+          <div class="money">RM 500</div>
+          <div class="money positive">RM 300</div>
+        </div>
+
+        <div class="table-row income-grid total-row">
+          <div class="category-name">Total Income</div>
+          <div class="money">RM 5,000</div>
+          <div class="money positive">RM 4,800</div>
+        </div>
       </div>
 
-      <div class="section-title">Add Account</div>
-
       <div class="card">
-        <label class="label">Account Name</label>
-        <input id="accountName" class="input" type="text" placeholder="Example: Maybank Savings" />
-
-        <label class="label">Account Type</label>
-        <select id="accountType" class="select">
-          <option value="Bank">Bank</option>
-          <option value="Cash">Cash</option>
-          <option value="E-wallet">E-wallet</option>
-          <option value="Investment">Investment</option>
-          <option value="Savings">Savings</option>
-          <option value="Other">Other</option>
-        </select>
-
-        <label class="label">Current Balance</label>
-        <input id="accountBalance" class="input" type="number" inputmode="decimal" placeholder="Example: 4200" />
-
-        <button class="button" onclick="addAccount()">
-          Save Account
-        </button>
-
-        <div id="saveMessage" class="success-text">Account saved.</div>
+        <p class="note">
+          Income only tracks expected and actual. No “used” or “left” because income is not a budget.
+        </p>
       </div>
     </main>
 
-    <!-- Plan -->
-    <main id="planPage" class="page">
-      <div class="section-title">Monthly Plan</div>
+    <!-- Expenses -->
+    <main id="expensesPage" class="page">
+      <div class="section-title">Expenses</div>
+
+      <div class="card table-card">
+        <div class="table-header expenses-grid">
+          <div>Category</div>
+          <div class="money">Expected</div>
+          <div class="money">Used</div>
+          <div class="money">Left</div>
+        </div>
+
+        <div class="table-row expenses-grid">
+          <div>
+            <div class="category-name">Food</div>
+            <div class="category-sub">Meals and groceries</div>
+          </div>
+          <div class="money">RM 900</div>
+          <div class="money warning">RM 980</div>
+          <div class="money danger">-RM 80</div>
+        </div>
+
+        <div class="table-row expenses-grid">
+          <div>
+            <div class="category-name">Transport</div>
+            <div class="category-sub">Fuel, parking, Grab</div>
+          </div>
+          <div class="money">RM 500</div>
+          <div class="money">RM 420</div>
+          <div class="money positive">RM 80</div>
+        </div>
+
+        <div class="table-row expenses-grid">
+          <div>
+            <div class="category-name">Bills</div>
+            <div class="category-sub">Utilities and subscriptions</div>
+          </div>
+          <div class="money">RM 800</div>
+          <div class="money">RM 780</div>
+          <div class="money positive">RM 20</div>
+        </div>
+
+        <div class="table-row expenses-grid">
+          <div>
+            <div class="category-name">Family</div>
+            <div class="category-sub">Family support</div>
+          </div>
+          <div class="money">RM 1,300</div>
+          <div class="money">RM 1,520</div>
+          <div class="money danger">-RM 220</div>
+        </div>
+
+        <div class="table-row expenses-grid total-row">
+          <div class="category-name">Total Expenses</div>
+          <div class="money">RM 3,500</div>
+          <div class="money warning">RM 3,700</div>
+          <div class="money danger">-RM 200</div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Savings -->
+    <main id="savingsPage" class="page">
+      <div class="section-title">Savings</div>
+
+      <div class="card table-card">
+        <div class="table-header savings-grid">
+          <div>Category</div>
+          <div class="money">Expected</div>
+          <div class="money">Actual</div>
+        </div>
+
+        <div class="table-row savings-grid">
+          <div>
+            <div class="category-name">Emergency Fund</div>
+            <div class="category-sub">Monthly saving</div>
+          </div>
+          <div class="money">RM 700</div>
+          <div class="money positive">RM 500</div>
+        </div>
+
+        <div class="table-row savings-grid">
+          <div>
+            <div class="category-name">Investment Fund</div>
+            <div class="category-sub">Cash prepared to invest</div>
+          </div>
+          <div class="money">RM 500</div>
+          <div class="money positive">RM 400</div>
+        </div>
+
+        <div class="table-row savings-grid">
+          <div>
+            <div class="category-name">Travel Fund</div>
+            <div class="category-sub">Future spending goal</div>
+          </div>
+          <div class="money">RM 300</div>
+          <div class="money positive">RM 200</div>
+        </div>
+
+        <div class="table-row savings-grid total-row">
+          <div class="category-name">Total Savings</div>
+          <div class="money">RM 1,500</div>
+          <div class="money positive">RM 1,100</div>
+        </div>
+      </div>
 
       <div class="card">
-        <p class="empty-text">
-          We will build this next. For now, the account saving and dashboard totals are working first.
+        <p class="note">
+          Savings tracks expected and actual only for now. We are not tracking where the money is stored in this version.
         </p>
       </div>
     </main>
@@ -339,13 +556,16 @@
       <div class="section-title">Settings</div>
 
       <div class="card">
-        <p class="empty-text">
-          Your data is saved only in this browser/device using localStorage.
-        </p>
+        <label class="label">Month</label>
+        <input class="input" type="month" value="2026-05" />
 
-        <button class="button danger" onclick="resetAllData()">
-          Reset All Data
-        </button>
+        <button class="button">Save Month</button>
+      </div>
+
+      <div class="card">
+        <p class="note">
+          This is still a design preview. Next step is to make the rows editable and save data in browser localStorage.
+        </p>
       </div>
     </main>
 
@@ -356,179 +576,24 @@
         Dashboard
       </button>
 
-      <button class="nav-item" onclick="showPage('accounts', this)">
-        <span class="nav-icon">💳</span>
-        Accounts
+      <button class="nav-item" onclick="showPage('income', this)">
+        <span class="nav-icon">💰</span>
+        Income
       </button>
 
-      <button class="nav-item" onclick="showPage('plan', this)">
-        <span class="nav-icon">📅</span>
-        Plan
+      <button class="nav-item" onclick="showPage('expenses', this)">
+        <span class="nav-icon">🧾</span>
+        Expenses
       </button>
 
-      <button class="nav-item" onclick="showPage('settings', this)">
-        <span class="nav-icon">⚙️</span>
-        Settings
+      <button class="nav-item" onclick="showPage('savings', this)">
+        <span class="nav-icon">🏦</span>
+        Savings
       </button>
     </nav>
   </div>
 
   <script>
-    const STORAGE_KEY = 'moneyManagerAccounts';
-
-    let accounts = loadAccounts();
-
-    function loadAccounts() {
-      const savedAccounts = localStorage.getItem(STORAGE_KEY);
-
-      if (!savedAccounts) {
-        return [];
-      }
-
-      try {
-        return JSON.parse(savedAccounts);
-      } catch (error) {
-        return [];
-      }
-    }
-
-    function saveAccounts() {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(accounts));
-    }
-
-    function formatMoney(amount) {
-      return 'RM ' + Number(amount || 0).toLocaleString('en-MY', {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
-      });
-    }
-
-    function addAccount() {
-      const nameInput = document.getElementById('accountName');
-      const typeInput = document.getElementById('accountType');
-      const balanceInput = document.getElementById('accountBalance');
-      const saveMessage = document.getElementById('saveMessage');
-
-      const name = nameInput.value.trim();
-      const type = typeInput.value;
-      const balance = Number(balanceInput.value);
-
-      if (!name) {
-        alert('Please enter account name.');
-        return;
-      }
-
-      if (Number.isNaN(balance)) {
-        alert('Please enter a valid balance.');
-        return;
-      }
-
-      const account = {
-        id: Date.now(),
-        name: name,
-        type: type,
-        balance: balance
-      };
-
-      accounts.push(account);
-      saveAccounts();
-
-      nameInput.value = '';
-      balanceInput.value = '';
-
-      saveMessage.style.display = 'block';
-
-      setTimeout(function () {
-        saveMessage.style.display = 'none';
-      }, 1500);
-
-      renderApp();
-    }
-
-    function deleteAccount(accountId) {
-      const confirmed = confirm('Delete this account?');
-
-      if (!confirmed) {
-        return;
-      }
-
-      accounts = accounts.filter(function (account) {
-        return account.id !== accountId;
-      });
-
-      saveAccounts();
-      renderApp();
-    }
-
-    function resetAllData() {
-      const confirmed = confirm('Reset all saved data on this device?');
-
-      if (!confirmed) {
-        return;
-      }
-
-      accounts = [];
-      saveAccounts();
-      renderApp();
-
-      alert('All data has been reset.');
-    }
-
-    function getTotalByType(type) {
-      return accounts
-        .filter(function (account) {
-          return account.type === type;
-        })
-        .reduce(function (sum, account) {
-          return sum + Number(account.balance || 0);
-        }, 0);
-    }
-
-    function renderDashboard() {
-      const total = accounts.reduce(function (sum, account) {
-        return sum + Number(account.balance || 0);
-      }, 0);
-
-      document.getElementById('totalBalance').textContent = formatMoney(total);
-      document.getElementById('cashTotal').textContent = formatMoney(getTotalByType('Cash'));
-      document.getElementById('bankTotal').textContent = formatMoney(getTotalByType('Bank'));
-      document.getElementById('ewalletTotal').textContent = formatMoney(getTotalByType('E-wallet'));
-      document.getElementById('investmentTotal').textContent = formatMoney(getTotalByType('Investment'));
-      document.getElementById('accountCount').textContent = accounts.length;
-    }
-
-    function renderAccounts() {
-      const accountsList = document.getElementById('accountsList');
-
-      if (accounts.length === 0) {
-        accountsList.innerHTML = '<p class="empty-text">No accounts yet. Add your first account below.</p>';
-        return;
-      }
-
-      accountsList.innerHTML = accounts.map(function (account) {
-        return `
-          <div class="row">
-            <div>
-              <div class="row-label">${account.name}</div>
-              <div class="row-sub">${account.type}</div>
-            </div>
-
-            <div>
-              <div class="amount">${formatMoney(account.balance)}</div>
-              <button class="small-button" onclick="deleteAccount(${account.id})">
-                Delete
-              </button>
-            </div>
-          </div>
-        `;
-      }).join('');
-    }
-
-    function renderApp() {
-      renderDashboard();
-      renderAccounts();
-    }
-
     function showPage(pageName, button) {
       const pages = document.querySelectorAll('.page');
       const navItems = document.querySelectorAll('.nav-item');
@@ -546,23 +611,25 @@
       button.classList.add('active');
 
       if (pageName === 'dashboard') {
-        subtitle.textContent = 'Your simple money overview';
+        subtitle.textContent = 'Monthly overview based on expected and actual numbers';
       }
 
-      if (pageName === 'accounts') {
-        subtitle.textContent = 'View your accounts and balances';
+      if (pageName === 'income') {
+        subtitle.textContent = 'Expected and actual income for the month';
       }
 
-      if (pageName === 'plan') {
-        subtitle.textContent = 'Track expected and actual monthly numbers';
+      if (pageName === 'expenses') {
+        subtitle.textContent = 'Expected, used, and left expenses';
+      }
+
+      if (pageName === 'savings') {
+        subtitle.textContent = 'Expected and actual savings for the month';
       }
 
       if (pageName === 'settings') {
         subtitle.textContent = 'App preferences and setup';
       }
     }
-
-    renderApp();
   </script>
 </body>
 </html>
