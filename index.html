@@ -1,45 +1,401 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Money Manager</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
-      padding: 24px;
+      font-family: Arial, sans-serif;
       background: #f4f6f8;
+      color: #111827;
+    }
+
+    .app {
+      max-width: 480px;
+      margin: 0 auto;
+      min-height: 100vh;
+      background: #f4f6f8;
+      padding-bottom: 80px;
+    }
+
+    .header {
+      padding: 20px 18px 10px;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 26px;
+    }
+
+    .header p {
+      margin: 6px 0 0;
+      color: #6b7280;
+      font-size: 14px;
+    }
+
+    .page {
+      display: none;
+      padding: 12px 18px;
+    }
+
+    .page.active {
+      display: block;
     }
 
     .card {
       background: white;
+      border-radius: 18px;
+      padding: 18px;
+      margin-bottom: 14px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+    }
+
+    .card-title {
+      font-size: 14px;
+      color: #6b7280;
+      margin-bottom: 8px;
+    }
+
+    .big-amount {
+      font-size: 32px;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 22px 0 12px;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #eef0f2;
+    }
+
+    .row:last-child {
+      border-bottom: none;
+    }
+
+    .row-label {
+      font-weight: bold;
+    }
+
+    .row-sub {
+      font-size: 13px;
+      color: #6b7280;
+      margin-top: 3px;
+    }
+
+    .amount {
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .mini-card {
+      background: white;
       border-radius: 16px;
-      padding: 20px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      padding: 16px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
     }
 
-    h1 {
-      margin-top: 0;
+    .mini-label {
+      font-size: 13px;
+      color: #6b7280;
+      margin-bottom: 8px;
     }
 
-    button {
+    .mini-value {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .button {
       width: 100%;
+      border: none;
+      border-radius: 14px;
       padding: 14px;
-      border: 0;
-      border-radius: 12px;
       font-size: 16px;
+      font-weight: bold;
       background: #111827;
       color: white;
+      cursor: pointer;
+    }
+
+    .button.secondary {
+      background: #e5e7eb;
+      color: #111827;
+    }
+
+    .input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #d1d5db;
+      border-radius: 12px;
+      font-size: 16px;
+      margin-top: 8px;
+      margin-bottom: 14px;
+      background: white;
+    }
+
+    .label {
+      font-size: 14px;
+      font-weight: bold;
+      color: #374151;
+    }
+
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 480px;
+      background: white;
+      border-top: 1px solid #e5e7eb;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      padding: 8px 6px;
+    }
+
+    .nav-item {
+      border: none;
+      background: none;
+      padding: 8px 4px;
+      font-size: 12px;
+      color: #6b7280;
+      cursor: pointer;
+    }
+
+    .nav-item.active {
+      color: #111827;
+      font-weight: bold;
+    }
+
+    .nav-icon {
+      display: block;
+      font-size: 20px;
+      margin-bottom: 3px;
+    }
+
+    .empty-text {
+      color: #6b7280;
+      font-size: 14px;
+      line-height: 1.5;
     }
   </style>
 </head>
+
 <body>
-  <div class="card">
-    <h1>Money Manager</h1>
-    <p>If you can see this on your phone, GitHub Pages is working.</p>
-    <button onclick="alert('Test successful')">Tap Test</button>
+  <div class="app">
+    <header class="header">
+      <h1>Money Manager</h1>
+      <p id="pageSubtitle">Your simple money overview</p>
+    </header>
+
+    <!-- Dashboard -->
+    <main id="dashboardPage" class="page active">
+      <div class="card">
+        <div class="card-title">Total Balance</div>
+        <p class="big-amount">RM 12,450</p>
+      </div>
+
+      <div class="grid">
+        <div class="mini-card">
+          <div class="mini-label">Cash</div>
+          <div class="mini-value">RM 850</div>
+        </div>
+
+        <div class="mini-card">
+          <div class="mini-label">Savings</div>
+          <div class="mini-value">RM 6,200</div>
+        </div>
+
+        <div class="mini-card">
+          <div class="mini-label">Investment</div>
+          <div class="mini-value">RM 5,400</div>
+        </div>
+
+        <div class="mini-card">
+          <div class="mini-label">This Month</div>
+          <div class="mini-value">+RM 900</div>
+        </div>
+      </div>
+
+      <div class="section-title">Quick View</div>
+
+      <div class="card">
+        <div class="row">
+          <div>
+            <div class="row-label">Expected Income</div>
+            <div class="row-sub">Monthly plan</div>
+          </div>
+          <div class="amount">RM 5,000</div>
+        </div>
+
+        <div class="row">
+          <div>
+            <div class="row-label">Actual Income</div>
+            <div class="row-sub">Recorded this month</div>
+          </div>
+          <div class="amount">RM 4,800</div>
+        </div>
+
+        <div class="row">
+          <div>
+            <div class="row-label">Expected Savings</div>
+            <div class="row-sub">Monthly target</div>
+          </div>
+          <div class="amount">RM 1,500</div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Accounts -->
+    <main id="accountsPage" class="page">
+      <div class="section-title">Accounts</div>
+
+      <div class="card">
+        <div class="row">
+          <div>
+            <div class="row-label">Maybank Savings</div>
+            <div class="row-sub">Bank</div>
+          </div>
+          <div class="amount">RM 4,200</div>
+        </div>
+
+        <div class="row">
+          <div>
+            <div class="row-label">TNG eWallet</div>
+            <div class="row-sub">E-wallet</div>
+          </div>
+          <div class="amount">RM 250</div>
+        </div>
+
+        <div class="row">
+          <div>
+            <div class="row-label">Investment Account</div>
+            <div class="row-sub">Investment</div>
+          </div>
+          <div class="amount">RM 5,400</div>
+        </div>
+      </div>
+
+      <button class="button" onclick="alert('Add account will be built next')">
+        Add Account
+      </button>
+    </main>
+
+    <!-- Plan -->
+    <main id="planPage" class="page">
+      <div class="section-title">Monthly Plan</div>
+
+      <div class="card">
+        <label class="label">Expected Income</label>
+        <input class="input" type="number" placeholder="5000" />
+
+        <label class="label">Actual Income</label>
+        <input class="input" type="number" placeholder="4800" />
+
+        <label class="label">Expected Savings</label>
+        <input class="input" type="number" placeholder="1500" />
+
+        <label class="label">Actual Savings</label>
+        <input class="input" type="number" placeholder="900" />
+
+        <button class="button" onclick="alert('Plan saved test')">
+          Save Plan
+        </button>
+      </div>
+    </main>
+
+    <!-- Settings -->
+    <main id="settingsPage" class="page">
+      <div class="section-title">Settings</div>
+
+      <div class="card">
+        <p class="empty-text">
+          Settings will come later. For now, this page confirms that the mobile app layout and navigation are working.
+        </p>
+
+        <button class="button secondary" onclick="alert('Settings test successful')">
+          Test Button
+        </button>
+      </div>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <button class="nav-item active" onclick="showPage('dashboard')">
+        <span class="nav-icon">🏠</span>
+        Dashboard
+      </button>
+
+      <button class="nav-item" onclick="showPage('accounts')">
+        <span class="nav-icon">💳</span>
+        Accounts
+      </button>
+
+      <button class="nav-item" onclick="showPage('plan')">
+        <span class="nav-icon">📅</span>
+        Plan
+      </button>
+
+      <button class="nav-item" onclick="showPage('settings')">
+        <span class="nav-icon">⚙️</span>
+        Settings
+      </button>
+    </nav>
   </div>
+
+  <script>
+    function showPage(pageName) {
+      const pages = document.querySelectorAll('.page');
+      const navItems = document.querySelectorAll('.nav-item');
+      const subtitle = document.getElementById('pageSubtitle');
+
+      pages.forEach(page => page.classList.remove('active'));
+      navItems.forEach(item => item.classList.remove('active'));
+
+      document.getElementById(pageName + 'Page').classList.add('active');
+
+      const clickedButton = event.currentTarget;
+      clickedButton.classList.add('active');
+
+      if (pageName === 'dashboard') {
+        subtitle.textContent = 'Your simple money overview';
+      }
+
+      if (pageName === 'accounts') {
+        subtitle.textContent = 'View your accounts and balances';
+      }
+
+      if (pageName === 'plan') {
+        subtitle.textContent = 'Track expected and actual monthly numbers';
+      }
+
+      if (pageName === 'settings') {
+        subtitle.textContent = 'App preferences and setup';
+      }
+    }
+  </script>
 </body>
 </html>
